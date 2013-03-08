@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasseBriques", "CasseBriques\CasseBriques\CasseBriques.csproj", "{6438976B-F21A-4753-9FAA-1A485DA3A795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CasseBriquesContent", "CasseBriques\CasseBriquesContent\CasseBriquesContent.contentproj", "{81825E29-47FA-45F9-8140-7DB40EB6F768}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56BED9B5-5D11-405D-8D65-7F289D936CC5}"
+EndProject
+Global
+	GlobalSection(PowerDesigner) = preSolution
+		HasSWS = 1
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6438976B-F21A-4753-9FAA-1A485DA3A795}.Debug|x86.ActiveCfg = Debug|x86
+		{6438976B-F21A-4753-9FAA-1A485DA3A795}.Debug|x86.Build.0 = Debug|x86
+		{6438976B-F21A-4753-9FAA-1A485DA3A795}.Release|x86.ActiveCfg = Release|x86
+		{6438976B-F21A-4753-9FAA-1A485DA3A795}.Release|x86.Build.0 = Release|x86
+		{81825E29-47FA-45F9-8140-7DB40EB6F768}.Debug|x86.ActiveCfg = Debug|x86
+		{81825E29-47FA-45F9-8140-7DB40EB6F768}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
