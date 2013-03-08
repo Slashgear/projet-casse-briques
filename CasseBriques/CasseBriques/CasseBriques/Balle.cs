@@ -10,7 +10,7 @@ namespace CasseBriques
 {
     class Balle : Microsoft.Xna.Framework.DrawableGameComponent
     {
-        private const int NBLIGNES = 5;
+        private const int NBLIGNES = 5; 
         private const int NBCOLONNES = 8;
         SpriteBatch spriteBatch;
         private int maxX;
