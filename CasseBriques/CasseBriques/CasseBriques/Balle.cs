@@ -89,7 +89,7 @@ namespace CasseBriques
 
         public override void Initialize()
         {
-            // On définit une vitesse initiale minimale
+            // On définit une vitesse initiale minimale 
             v_min = new Vector2(1, -1);
             // on fixe une vitesse maximale
             v_max = new Vector2(7, 8);
