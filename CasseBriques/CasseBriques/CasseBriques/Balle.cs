@@ -160,7 +160,7 @@ namespace CasseBriques
                         float[] infosBrique = { unebrique.Position.X, unebrique.Position.Y, unebrique.Position.X + unebrique.Size.X, unebrique.Position.Y + unebrique.Size.Y };
                         posRel = Moteur2D.getRelativePosition(infosBalle, infosBrique);
 
-                      /*  if (posRel[0] == Moteur2D.CROISEMENT)
+                        if (posRel[0] == Moteur2D.CROISEMENT)
                         {
                             v.Y *= -1;
                             
@@ -168,7 +168,7 @@ namespace CasseBriques
                                 v.Y *= 1.1f;
                             uneballe.Vitesse = v;
                         }
-                        */
+                        
                         // Si les 2 objets se croisent sur l'axe des Y
                         if ((posRel[1] == Moteur2D.EN_DESSOUS)||(posRel[1]==Moteur2D.AU_DESSUS))
                         {
