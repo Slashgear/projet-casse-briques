@@ -21,7 +21,7 @@ namespace CasseBriques
 
         public int Nbreballes
         {
-            get { return nbreballes; }
+            get { return nbreballes;}
             set { nbreballes = value; }
         }
         // On définit la position de départ de la balle 
