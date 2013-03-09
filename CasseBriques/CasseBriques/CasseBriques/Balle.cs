@@ -171,7 +171,7 @@ namespace CasseBriques
                             if (v.Y < v_max.Y)
                                 v.Y *= 1.1f;
                             uneballe.Vitesse = v;
-                        }
+                        } 
 
                         // Si les 2 objets se croisent sur l'axe des X
                         if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)))
