@@ -314,8 +314,7 @@ namespace CasseBriques
           
             // Test la collision et modifie le vecteur vitesse en fonction
             gestionCollision();
-            gestionCollisionBrique();
-            // déplacement de la balle
+            gestionCollisionBrique(); 
             uneballe.Position += uneballe.Vitesse;
         }
          
