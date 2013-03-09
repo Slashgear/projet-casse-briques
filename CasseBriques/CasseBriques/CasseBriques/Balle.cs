@@ -130,6 +130,7 @@ namespace CasseBriques
         // Test la collision avec les briques 
         private void gestionCollisionBrique()
         {
+            //fonction qui teste la collision entre une Brique et la Balle, elle gère les mouvements de la balle suite à cette collision
             BoundingBox bbox_brique;
            Brique unebrique;
             Vector2 v;
@@ -208,16 +209,17 @@ namespace CasseBriques
                 x++;
             }
           if (collision)
-              mesBriquesballe[tempx, tempy].Marque = true;
+              mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassé 
         }
                 
 
            
 
 
-        // Test la collision et modifie le vecteur vitesse en fonction
+        
         private void gestionCollision()
         {
+            // Test la collision  entre la balle et les murs et la balle et la raquette et elle modifie le vecteur vitesse en fonction
             Vector2 v;
             // Test de collision
             float[] infosBalle = { uneballe.Position.X, uneballe.Position.Y, TAILLEX,TAILLEY };
