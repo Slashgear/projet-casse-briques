@@ -135,7 +135,7 @@ namespace CasseBriques
            Brique unebrique;
             Vector2 v;
             Boolean collision = false;
-            float[] infosBalle = { uneballe.Position.X, uneballe.Position.Y, uneballe.Position.X + TAILLEX, uneballe.Position.Y+TAILLEY };
+            float[] infosBalle = { uneballe.Position.X, uneballe.Position.Y, TAILLEX, TAILLEY };
             int[] posRel;
             int x = 0;
             int y = 0;
@@ -158,44 +158,31 @@ namespace CasseBriques
                     {
                         // Le prochain mouvement entraîne une collision, on évalue la position relative de la balle
                         // par rapport à la raquette pour mettre à jour le vecteur vitesse
-                        float[] infosBrique = { unebrique.Position.X, unebrique.Position.Y, unebrique.Position.X + unebrique.Size.X, unebrique.Position.Y + unebrique.Size.Y };
+                        float[] infosBrique = { unebrique.Position.X, unebrique.Position.Y, unebrique.Size.X, unebrique.Size.Y };
                         posRel = Moteur2D.getRelativePosition(infosBalle, infosBrique);
 
-                        if (posRel[0] == Moteur2D.CROISEMENT)
-                        {
-                            v.Y *= -1;
-                            
-                            if (v.Y < v_max.Y)
-                                v.Y *= 1.1f;
-                            uneballe.Vitesse = v;
-                        }
                         
                         // Si les 2 objets se croisent sur l'axe des Y
                         if ((posRel[1] == Moteur2D.EN_DESSOUS)||(posRel[1]==Moteur2D.AU_DESSUS))
                         {
-                            v.X *= -1;
+                            v.Y *= -1;
 
 
-                            if (v.X < v_max.X)
-                                v.X *= 1.1f;
+                            if (v.Y < v_max.Y)
+                                v.Y *= 1.1f;
                             uneballe.Vitesse = v;
                         }
-                       
-                        if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)) && (posRel[1] == Moteur2D.EN_DESSOUS))
+
+                        // Si les 2 objets se croisent sur l'axe des X
+                        if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)))
                         {
                             v.X *= -1;
                             if (v.X < v_max.X)
                                 v.X *= 1.1f;
                             uneballe.Vitesse = v;
                         }
-                        if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)) && (posRel[1] == Moteur2D.AU_DESSUS))
-                        {
-                            v.X *= -1;
-                            if (v.X < v_max.X)
-                                v.X *= 1.1f;
-                            uneballe.Vitesse = v;
-                        }
-
+                     
+                        
 
                         SoundEffectInstance soundInstRaquette = soundRaquette.CreateInstance();
                         soundInstRaquette.Volume = 0.8f;
@@ -234,21 +221,23 @@ namespace CasseBriques
                 float[] infosRaquette = { raquette.Uneraquette.Position.X, raquette.Uneraquette.Position.Y, raquette.Uneraquette.Size.X, raquette.Uneraquette.Size.Y };
                 posRel = Moteur2D.getRelativePosition(infosBalle, infosRaquette);
                
-                if (posRel[0] == Moteur2D.CROISEMENT)
-                {
-                       v.Y *= - 1;
-
-                   // if (v.Y < v_max.Y)
-                     //   v.Y *= 1.1f;
-                  uneballe.Vitesse = v;
-                }
 
                 // Si les 2 objets se croisent sur l'axe des Y
-                if (posRel[1] == Moteur2D.AU_DESSUS)
+                if ((posRel[1] == Moteur2D.AU_DESSUS) || (posRel[1] == Moteur2D.EN_DESSOUS))
                 {
                     v.Y *= -1;
 
-                   // if (v.X < v_max.X)
+                   // if (v.Y < v_max.Y)
+                    //    v.Y *= 1.1f;
+                    uneballe.Vitesse = v;
+                }
+
+                // Si les 2 objets se croisent sur l'axe des X
+                if ((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE))
+                {
+                    v.X *= -1;
+                    v.Y *= -1;
+                    // if (v.X < v_max.X)
                     //    v.X *= 1.1f;
                     uneballe.Vitesse = v;
                 }
