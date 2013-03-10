@@ -181,9 +181,6 @@ namespace CasseBriques
                                 v.X *= 1.1f;
                             uneballe.Vitesse = v;
                         }
-                     
-                        
-
                         SoundEffectInstance soundInstRaquette = soundRaquette.CreateInstance();
                         soundInstRaquette.Volume = 0.8f;
                         soundInstRaquette.Play();
@@ -211,6 +208,10 @@ namespace CasseBriques
             // Test de collision
             float[] infosBalle = { uneballe.Position.X, uneballe.Position.Y, TAILLEX,TAILLEY };
             int[] posRel;
+            int[] posRel_centre;
+            double theta;
+            double pourcentage;
+
             // avec les raquettes
             // On récupère la vitesse courante
             v = uneballe.Vitesse;
@@ -220,14 +221,40 @@ namespace CasseBriques
                 // par rapport à la raquette pour mettre à jour le vecteur vitesse
                 float[] infosRaquette = { raquette.Uneraquette.Position.X, raquette.Uneraquette.Position.Y, raquette.Uneraquette.Size.X, raquette.Uneraquette.Size.Y };
                 posRel = Moteur2D.getRelativePosition(infosBalle, infosRaquette);
-               
+                float[] infoscentreRaquette={(raquette.Uneraquette.Position.X+raquette.Uneraquette.Size.X/2),(raquette.Uneraquette.Position.Y+raquette.Uneraquette.Size.Y/2),1,1};
+                posRel_centre=Moteur2D.getRelativePosition(infosBalle, infoscentreRaquette);
 
                 // Si les 2 objets se croisent sur l'axe des Y
-                if ((posRel[1] == Moteur2D.AU_DESSUS) || (posRel[1] == Moteur2D.EN_DESSOUS))
+                if (posRel[1] == Moteur2D.AU_DESSUS)
+                {
+                    /*
+                    pourcentage =Math.Abs((infosBalle[0] - infoscentreRaquette[0])/(raquette.Uneraquette.Size.X/2));
+                    theta = 90 - (50 * (pourcentage));
+                    if (posRel_centre[0] == Moteur2D.A_GAUCHE)
+                    {
+                        v.Y = (float)(-Math.Abs(v.Y) * (1-Math.Cos(theta)));
+                        v.X = (float)(-Math.Abs(v.X) * Math.Cos(theta));
+                        
+                    }
+                    else if (posRel_centre[0]==Moteur2D.A_DROITE)
+                    {
+                        v.Y = (float)(-Math.Abs(v.Y) * (1 - Math.Cos(theta)));
+                        v.X = (float)(Math.Abs(v.X) * Math.Cos(theta));
+                    }*/
+
+                    v.Y *= -1;
+                   
+
+                   // if (v.Y < v_max.Y)
+                    //    v.Y *= 1.1f;
+                    uneballe.Vitesse = v;
+                }
+
+                if  (posRel[1] == Moteur2D.EN_DESSOUS)
                 {
                     v.Y *= -1;
 
-                   // if (v.Y < v_max.Y)
+                    // if (v.Y < v_max.Y)
                     //    v.Y *= 1.1f;
                     uneballe.Vitesse = v;
                 }
