@@ -39,7 +39,7 @@ namespace CasseBriques
             get { return posScoreJoueur; }
         }
 
-/*
+
         public Joueur(Game game)
             : this(game, 1, 0)
         {
@@ -58,16 +58,16 @@ namespace CasseBriques
             switch (noJoueur)
             {
                 case 1:
-                    this.raquette = new Raquette(game, this, "raquette1", Raquette.VITESSE_RAQUETTE);
+                    this.raquette = new Raquette (game,1024, 680);
                     this.posScoreJoueur = new Vector2(50, 0);
                     break;
                 case 2:
-                    this.raquette = new Raquette(game, this, "raquette2", Raquette.VITESSE_RAQUETTE);
+                    this.raquette = new Raquette(game,1024, 680);
                     this.posScoreJoueur = new Vector2(game.GraphicsDevice.Viewport.Width - 150, 0);
                     break;
             }
         }
-        */
+        
         public void updateScore(int points)
         {
             scoreJoueur += points;

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
@@ -38,6 +39,9 @@ namespace CasseBriques
         private MenuButton boutonplay;
         private MouseEvent mouseEvent;
 
+        //declaration d'un joueur
+        private Joueur unjoueur;
+
         public Jeu()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -56,12 +60,20 @@ namespace CasseBriques
             int offsetY = 40;
             // TODO: Add your initialization logic here
             uneballe = new Balle(this, TAILLEH , TAILLEV);
-            Raquette raquette = new Raquette(this, TAILLEH ,TAILLEV );
+
+            //Raquette raquette = new Raquette(this, TAILLEH ,TAILLEV );
+            unjoueur = new Joueur(this, 1, 0);
+
+
+            Raquette raquette = unjoueur.Raquette;
+
+
             // Les objets raquette et balle doivent se connaître 
             // On passe la raquette à la balle 
             uneballe.Raquette = raquette;
             // on passe la balle à la raquette 
             raquette.Balle = uneballe;
+
             // On passe à la balle le tableau de briques
             int xpos, ypos;
             for (int x = 0; x < NBLIGNES; x++)
@@ -80,6 +92,8 @@ namespace CasseBriques
             uneballe.MesBriquesballe = mesBriques;
             boutonplay = new MenuButton(new Vector2(900,600), Content.Load<Texture2D>(@"mesimages\play"),new Rectangle( 900,600, 200, 100) );
             mouseEvent = new MouseEvent();
+
+
             base.Initialize();
         }
 
@@ -131,6 +145,18 @@ namespace CasseBriques
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            int i, j;
+            for (i = 0; i < NBLIGNES; i++)
+            {
+                for (j = 0; j < NBBRIQUES; j++)
+                {
+                    if (mesBriques[i, j].Marque == false)
+                    {
+                        unjoueur.updateScore(100);
+                    }
+                }
+            }
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -146,16 +172,24 @@ namespace CasseBriques
         protected override void Draw(GameTime gameTime)
         {
            
-             Vector2 pos ;
+            Vector2 pos ;
             GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your drawing code here
              spriteBatch.Begin();
+
+             string afficheNbBalles = string.Format("Nombre de balles restantes: {0}", uneballe.Nbreballes);
+             spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2(1, 1), Color.White);
+
+             string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
+             spriteBatch.DrawString(this.textFont, afficheScore, new Vector2(1, 10), Color.White);
+
             // Boucle permettant de dessiner les briques des murs
            
              if (uneballe.Nbreballes == 0)
              {
                  spriteBatch.DrawString(this.textFont, "Game Over ... ! Vous avez épuisé toutes vos balles", new Vector2(13 * 20, 18 * 20), Color.Yellow);
+                 //Thread.Sleep(3000);
                  this.Exit();
              }
             for (int x = 0; x < NBLIGNES; x++)
