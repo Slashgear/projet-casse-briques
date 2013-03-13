@@ -44,9 +44,6 @@ namespace CasseBriques
             set { balle = value; }
         }
 
-       
-       
-
         public Raquette(Game game, int th, int tv)
             : base(game)
         {
