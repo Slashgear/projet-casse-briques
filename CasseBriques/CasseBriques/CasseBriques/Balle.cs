@@ -71,6 +71,15 @@ namespace CasseBriques
             get { return raquette; }
             set { raquette = value; }
         }
+
+        private Joueur joueur;
+
+        public Joueur Joueur
+        {
+            get { return joueur; }
+            set { joueur = value; }
+        }
+
         
 
 
@@ -194,7 +203,15 @@ namespace CasseBriques
             }
             if (collision)
             {
-                mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassé 
+                mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassée
+
+                joueur.updateScore(100);
+                joueur.updateCombo(true);
+                if (joueur.CompteurCombo <= 2)
+                {
+                    joueur.updateScore(50 * (joueur.CompteurCombo));
+                }
+                
                 
             }
             
@@ -276,6 +293,7 @@ namespace CasseBriques
                 SoundEffectInstance soundInstRaquette = soundRaquette.CreateInstance();
                 soundInstRaquette.Volume = 0.8f;
                 soundInstRaquette.Play();
+                joueur.reinitialiserCombo();
             }
            
             else
@@ -320,8 +338,7 @@ namespace CasseBriques
                     SoundEffectInstance soundInstMur = soundMur.CreateInstance();
                     soundInstMur.Volume = 0.6f;
                     soundInstMur.Play();
-                   
-
+                    joueur.updateCombo(false);
                 }
             }
         }
