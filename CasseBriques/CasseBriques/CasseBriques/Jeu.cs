@@ -145,18 +145,6 @@ namespace CasseBriques
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            int i, j;
-            for (i = 0; i < NBLIGNES; i++)
-            {
-                for (j = 0; j < NBBRIQUES; j++)
-                {
-                    if (mesBriques[i, j].Marque == false)
-                    {
-                        unjoueur.updateScore(100);
-                    }
-                }
-            }
-
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
