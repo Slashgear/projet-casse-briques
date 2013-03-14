@@ -74,6 +74,9 @@ namespace CasseBriques
             // on passe la balle à la raquette 
             raquette.Balle = uneballe;
 
+            //on passe le joueur a la balle pour gérer le score
+            uneballe.Joueur = unjoueur;
+
             // On passe à la balle le tableau de briques
             int xpos, ypos;
             for (int x = 0; x < NBLIGNES; x++)
