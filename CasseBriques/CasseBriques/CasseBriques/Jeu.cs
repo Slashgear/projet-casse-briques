@@ -166,11 +166,11 @@ namespace CasseBriques
             // TODO: Add your drawing code here
              spriteBatch.Begin();
 
-             string afficheNbBalles = string.Format("Nombre de balles restantes: {0}", uneballe.Nbreballes);
-             spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2(1, 1), Color.White);
+             string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
+             spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
 
              string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
-             spriteBatch.DrawString(this.textFont, afficheScore, new Vector2(1, 20), Color.White);
+             spriteBatch.DrawString(this.textFont, afficheScore, new Vector2(10, 5), Color.White);
 
             // Boucle permettant de dessiner les briques des murs
            
