@@ -192,8 +192,12 @@ namespace CasseBriques
                 }
                 x++;
             }
-          if (collision)
-              mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassé 
+            if (collision)
+            {
+                mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassé 
+                
+            }
+            
         }
                 
 
