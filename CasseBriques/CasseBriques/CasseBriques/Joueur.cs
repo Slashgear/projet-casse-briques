@@ -39,6 +39,20 @@ namespace CasseBriques
             get { return posScoreJoueur; }
         }
 
+        private int compteurCombo;
+        public int CompteurCombo
+        {
+            get { return compteurCombo; }
+            set { compteurCombo = value; }
+        }
+
+        private bool aTouche;
+        public bool ATouche
+        {
+            get { return aTouche; }
+            set { aTouche = value; }
+        }
+
 
         public Joueur(Game game)
             : this(game, 1, 0)
@@ -73,5 +87,18 @@ namespace CasseBriques
             scoreJoueur += points;
         }
 
+        public void updateCombo(bool vientDeTouche)
+        {
+            if (aTouche)
+                compteurCombo++;
+            else aTouche = vientDeTouche;
+        }
+
+        public void reinitialiserCombo()
+        {
+            compteurCombo = 0;
+            aTouche = false;
+
+        }
     }
 }
