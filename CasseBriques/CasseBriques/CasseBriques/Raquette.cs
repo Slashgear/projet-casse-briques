@@ -90,7 +90,7 @@ namespace CasseBriques
                 if (!Moteur2D.testCollision(this, this.balle.Bbox))
                 {
                     // Est-ce qu'on est tout à droite  ?
-                if (uneraquette.Position.X + uneraquette.Texture.Width < maxX)
+                if (uneraquette.Position.X + uneraquette.Texture.Width <= maxX)
                 {                 
                     // On passe par un vecteur intermédiaire 
                     // pour initialiser la nouvelle position 
@@ -108,7 +108,7 @@ namespace CasseBriques
                 if (!Moteur2D.testCollision(this, this.balle.Bbox))
                 {
                     // Est-ce qu'on est tout à gauche ?
-                    if (uneraquette.Position.X > minX)
+                    if (uneraquette.Position.X >= minX)
                     {
                         // On passe par un vecteur intermédiaire 
                         // pour initialiser la nouvelle position 
