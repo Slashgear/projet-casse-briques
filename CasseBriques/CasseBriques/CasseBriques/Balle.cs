@@ -240,6 +240,7 @@ namespace CasseBriques
             int[] posRel_centre;
             double theta;
             double pourcentage;
+            double norme;
 
             // avec les raquettes
             // On récupère la vitesse courante
@@ -250,28 +251,28 @@ namespace CasseBriques
                 // par rapport à la raquette pour mettre à jour le vecteur vitesse
                 float[] infosRaquette = { raquette.Uneraquette.Position.X, raquette.Uneraquette.Position.Y, raquette.Uneraquette.Size.X, raquette.Uneraquette.Size.Y };
                 posRel = Moteur2D.getRelativePosition(infosBalle, infosRaquette);
-                float[] infoscentreRaquette={(raquette.Uneraquette.Position.X+raquette.Uneraquette.Size.X/2),(raquette.Uneraquette.Position.Y+raquette.Uneraquette.Size.Y/2),1,1};
+                float[] infoscentreRaquette={(raquette.Uneraquette.Position.X+(raquette.Uneraquette.Size.X)/2),(raquette.Uneraquette.Position.Y+(raquette.Uneraquette.Size.Y)/2),0,0};
                 posRel_centre=Moteur2D.getRelativePosition(infosBalle, infoscentreRaquette);
 
                 // Si les 2 objets se croisent sur l'axe des Y
                 if (posRel[1] == Moteur2D.AU_DESSUS)
                 {
-                    /*
-                    pourcentage =Math.Abs((infosBalle[0] - infoscentreRaquette[0])/(raquette.Uneraquette.Size.X/2));
-                    theta = 90 - (50 * (pourcentage));
+                    
+                    pourcentage =Math.Abs((infosBalle[0]+(infosBalle[2]/2) - infoscentreRaquette[0])/(raquette.Uneraquette.Size.X/2));
+                    theta = (pourcentage * (Math.PI / 5))+(((Math.PI / 5)-(pourcentage * (Math.PI / 5)))*(5/2));
+                    norme = Math.Sqrt((v.X*v.X) + (v.Y*v.Y));
                     if (posRel_centre[0] == Moteur2D.A_GAUCHE)
                     {
-                        v.Y = (float)(-Math.Abs(v.Y) * (1-Math.Cos(theta)));
-                        v.X = (float)(-Math.Abs(v.X) * Math.Cos(theta));
+                        v.Y = (float)-(norme*Math.Sin(theta));
+                        v.X = (float)-(norme*Math.Cos(theta));
                         
                     }
-                    else if (posRel_centre[0]==Moteur2D.A_DROITE)
+                    else 
                     {
-                        v.Y = (float)(-Math.Abs(v.Y) * (1 - Math.Cos(theta)));
-                        v.X = (float)(Math.Abs(v.X) * Math.Cos(theta));
-                    }*/
+                        v.Y = (float)-(norme*Math.Sin(theta));
+                        v.X = (float)(norme * Math.Cos(theta));
+                    }
 
-                    v.Y *= -1;
                     // if (Math.Abs(v.Y) < v_max.Y)
                     //    v.Y *= 1.1f;
                     uneballe.Vitesse = v;
