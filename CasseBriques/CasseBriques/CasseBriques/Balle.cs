@@ -272,7 +272,6 @@ namespace CasseBriques
                         v.Y = (float)-(norme*Math.Sin(theta));
                         v.X = (float)(norme * Math.Cos(theta));
                     }
-
                     // if (Math.Abs(v.Y) < v_max.Y)
                     //    v.Y *= 1.1f;
                     uneballe.Vitesse = v;
@@ -313,21 +312,21 @@ namespace CasseBriques
                 bool collision_murs = false;
 
                 // collision avec le mur gauche
-                if (uneballe.Position.X + uneballe.Size.X <= minX)
+                if (uneballe.Position.X  <= minX)
                 {
                     v.X *= -1;
                     uneballe.Vitesse = v;
                     collision_murs = true;
                 }
                 // collision avec le mur droit
-                if (uneballe.Position.X >= maxX)
+                if (uneballe.Position.X + uneballe.Size.X >= maxX)
                 {
                     v.X *= - 1;
                     uneballe.Vitesse = v;
                     collision_murs = true;
                 }
                 // On passe au dessus du nur 
-                if (uneballe.Position.Y + uneballe.Size.Y <= minY )
+                if (uneballe.Position.Y <= minY )
                 {
                     v.Y *= -1;
                     collision_murs = true;
