@@ -177,8 +177,11 @@ namespace CasseBriques
                             v.Y *= -1;
 
 
-                            if (Math.Abs(v.Y) < v_max.Y)
+                            if ((Math.Abs(v.Y) < v_max.Y) && (Math.Abs(v.X) < v_max.X))
+                            {
                                 v.Y *= 1.1f;
+                                v.X *= 1.1f;
+                            }
                             uneballe.Vitesse = v;
                         }
                         else
@@ -187,8 +190,11 @@ namespace CasseBriques
                             if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)))
                             {
                                 v.X *= -1;
-                                if (Math.Abs(v.X) < v_max.X)
+                                if ((Math.Abs(v.Y) < v_max.Y) && (Math.Abs(v.X) < v_max.X))
+                                {
+                                    v.Y *= 1.1f;
                                     v.X *= 1.1f;
+                                }
                                 uneballe.Vitesse = v;
                             }
                         }
