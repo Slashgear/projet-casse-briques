@@ -172,23 +172,25 @@ namespace CasseBriques
 
                         
                         // Si les 2 objets se croisent sur l'axe des Y
-                        if ((posRel[1] == Moteur2D.EN_DESSOUS)||(posRel[1]==Moteur2D.AU_DESSUS))
+                        if ((posRel[1] == Moteur2D.EN_DESSOUS) || (posRel[1] == Moteur2D.AU_DESSUS))
                         {
                             v.Y *= -1;
 
 
-                            if (v.Y < v_max.Y)
+                            if (Math.Abs(v.Y) < v_max.Y)
                                 v.Y *= 1.1f;
                             uneballe.Vitesse = v;
-                        } 
-
-                        // Si les 2 objets se croisent sur l'axe des X
-                        if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)))
+                        }
+                        else
                         {
-                            v.X *= -1;
-                            if (v.X < v_max.X)
-                                v.X *= 1.1f;
-                            uneballe.Vitesse = v;
+                            // Si les 2 objets se croisent sur l'axe des X
+                            if (((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE)))
+                            {
+                                v.X *= -1;
+                                if (Math.Abs(v.X) < v_max.X)
+                                    v.X *= 1.1f;
+                                uneballe.Vitesse = v;
+                            }
                         }
                         SoundEffectInstance soundInstRaquette = soundRaquette.CreateInstance();
                         soundInstRaquette.Volume = 0.8f;
@@ -264,30 +266,32 @@ namespace CasseBriques
                     }*/
 
                     v.Y *= -1;
-                   
-
-                   // if (v.Y < v_max.Y)
+                    // if (Math.Abs(v.Y) < v_max.Y)
                     //    v.Y *= 1.1f;
                     uneballe.Vitesse = v;
                 }
-
-                if  (posRel[1] == Moteur2D.EN_DESSOUS)
+                else
                 {
-                    v.Y *= -1;
+                    if (posRel[1] == Moteur2D.EN_DESSOUS)
+                    {
+                        v.Y *= -1;
 
-                    // if (v.Y < v_max.Y)
-                    //    v.Y *= 1.1f;
-                    uneballe.Vitesse = v;
-                }
-
-                // Si les 2 objets se croisent sur l'axe des X
-                if ((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE))
-                {
-                    v.X *= -1;
-                    v.Y *= -1;
-                    // if (v.X < v_max.X)
-                    //    v.X *= 1.1f;
-                    uneballe.Vitesse = v;
+                        // if (Math.Abs(v.Y) < v_max.Y)
+                        //    v.Y *= 1.1f;
+                        uneballe.Vitesse = v;
+                    }
+                    else
+                    {
+                        // Si les 2 objets se croisent sur l'axe des X
+                        if ((posRel[0] == Moteur2D.A_DROITE) || (posRel[0] == Moteur2D.A_GAUCHE))
+                        {
+                            v.X *= -1;
+                            v.Y *= -1;
+                            // if (Math.Abs(v.X) < v_max.X)
+                            //    v.X *= 1.1f;
+                            uneballe.Vitesse = v;
+                        }
+                    }
                 }
 
                 SoundEffectInstance soundInstRaquette = soundRaquette.CreateInstance();
