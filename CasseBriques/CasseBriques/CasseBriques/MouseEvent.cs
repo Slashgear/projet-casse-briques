@@ -19,6 +19,8 @@ namespace CasseBriques
 
         public MouseEvent()
         {
+            buttonPress = Mouse.GetState();
+            mousedetection = new Rectangle((int)buttonPress.X, (int)buttonPress.Y, (int)1, (int)1);
         }
         public bool UpdateMouse()
         {
@@ -29,6 +31,7 @@ namespace CasseBriques
         }
         public Rectangle GetMouseContainer()
         {
+            buttonPress = Mouse.GetState();
             mousedetection = new Rectangle((int)buttonPress.X, (int)buttonPress.Y, (int)1, (int)1);
             return mousedetection;
         }
