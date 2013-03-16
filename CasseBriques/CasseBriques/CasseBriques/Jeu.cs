@@ -93,7 +93,7 @@ namespace CasseBriques
             }
 
             uneballe.MesBriquesballe = mesBriques;
-            boutonplay = new MenuButton(new Vector2(900,600), Content.Load<Texture2D>(@"mesimages\play"),new Rectangle( 900,600, 200, 100) );
+            boutonplay = new MenuButton(new Vector2(200,450), Content.Load<Texture2D>(@"mesimages\play"),new Rectangle(200, 450, 200, 200) );
             mouseEvent = new MouseEvent();
 
 
@@ -152,10 +152,20 @@ namespace CasseBriques
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             // TODO: Add your update logic here
+            //System.Diagnostics.Debug.WriteLine(mouseEvent.GetMouseContainer.getX() + mouseEvent.GetMouseContainer.getY());
+            if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
+            {
+                if (mouseEvent.UpdateMouse() == true)
+                {
+                    this.Exit();
+                }
+            }
+            
           
             base.Update(gameTime);
         }
 
+       
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -165,10 +175,11 @@ namespace CasseBriques
            
             Vector2 pos ;
             GraphicsDevice.Clear(Color.Black);
+            this.IsMouseVisible = true;
 
             // TODO: Add your drawing code here
              spriteBatch.Begin();
-
+             boutonplay.DrawButton(spriteBatch);
              string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
              spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
 
