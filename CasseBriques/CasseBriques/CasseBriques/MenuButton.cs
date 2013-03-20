@@ -44,7 +44,7 @@ namespace CasseBriques
             container = new Rectangle((int)position.X, (int)position.Y, ((int)texture.Width), ((int)texture.Height));
             return container;
         }
-        public  void Draw(SpriteBatch spriteBatch)
+        public  void DrawButton(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, position, Color.White);
         }     
