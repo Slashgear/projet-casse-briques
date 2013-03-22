@@ -111,6 +111,7 @@
     <Compile Include="Brique.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Joueur.cs" />
+    <Compile Include="MainMenuScreen.cs" />
     <Compile Include="MenuButton.cs" />
     <Compile Include="Moteur2D.cs" />
     <Compile Include="MouseEvent.cs" />

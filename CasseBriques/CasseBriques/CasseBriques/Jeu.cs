@@ -37,6 +37,7 @@ namespace CasseBriques
         private Balle uneballe;
         //création du menu fail
         private MenuButton boutonplay;
+        private MenuButton boutonoptions;
         private MenuButton boutonexit;
         private MouseEvent mouseEvent;
 
@@ -96,7 +97,8 @@ namespace CasseBriques
             uneballe.MesBriquesballe = mesBriques;
             
             boutonplay = new MenuButton(new Vector2(450,350), Content.Load<Texture2D>(@"mesimages\play"), new Rectangle(450, 350, 150, 60));
-            boutonexit = new MenuButton(new Vector2(450, 420), Content.Load<Texture2D>(@"mesimages\exit"), new Rectangle(450, 420, 150, 60));
+            boutonoptions = new MenuButton(new Vector2(450, 420), Content.Load<Texture2D>(@"mesimages\options"), new Rectangle(450, 420, 150, 60));
+            boutonexit = new MenuButton(new Vector2(450, 490), Content.Load<Texture2D>(@"mesimages\exit"), new Rectangle(450, 490, 150, 60));
 
             mouseEvent = new MouseEvent();
 
@@ -164,6 +166,13 @@ namespace CasseBriques
                     
                 }
             }
+            if (mouseEvent.GetMouseContainer().Intersects(boutonoptions.getContainer()))
+            {
+                if (mouseEvent.UpdateMouse() == true)
+                {
+
+                }
+            }
             if (mouseEvent.GetMouseContainer().Intersects(boutonexit.getContainer()))
             {
                 if (mouseEvent.UpdateMouse() == true)
@@ -191,6 +200,7 @@ namespace CasseBriques
             // TODO: Add your drawing code here
              spriteBatch.Begin();
              boutonplay.DrawButton(spriteBatch);
+             boutonoptions.DrawButton(spriteBatch);
              boutonexit.DrawButton(spriteBatch);
              string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
              spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
