@@ -46,13 +46,6 @@ namespace CasseBriques
             set { compteurCombo = value; }
         }
 
-        private bool aTouche;
-        public bool ATouche
-        {
-            get { return aTouche; }
-            set { aTouche = value; }
-        }
-
 
         public Joueur(Game game)
             : this(game, 1, 0)
@@ -87,18 +80,14 @@ namespace CasseBriques
             scoreJoueur += points;
         }
 
-        public void updateCombo(bool vientDeTouche)
+        public void updateCombo()
         {
-            if (aTouche)
-                compteurCombo++;
-            else aTouche = vientDeTouche;
+            compteurCombo++;
         }
 
         public void reinitialiserCombo()
         {
             compteurCombo = 0;
-            aTouche = false;
-
         }
     }
 }

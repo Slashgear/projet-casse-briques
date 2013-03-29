@@ -214,8 +214,8 @@ namespace CasseBriques
                 mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassée
 
                 joueur.updateScore(100);
-                joueur.updateCombo(true);
-                if (joueur.CompteurCombo <= 2)
+                joueur.updateCombo();
+                if (joueur.CompteurCombo >= 2)
                 {
                     joueur.updateScore(50 * (joueur.CompteurCombo));
                 }
@@ -340,6 +340,7 @@ namespace CasseBriques
                     collision_murs = true;
                     uneballe.Vitesse = v;
                     this.nbreballes--;
+                    joueur.reinitialiserCombo();
 
                 }
 
@@ -348,7 +349,6 @@ namespace CasseBriques
                     SoundEffectInstance soundInstMur = soundMur.CreateInstance();
                     soundInstMur.Volume = 0.6f;
                     soundInstMur.Play();
-                    joueur.updateCombo(false);
                 }
             }
         }
