@@ -112,7 +112,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="mesimages\play.bmp">
+    <Compile Include="mesimages\exit.png">
+      <Name>exit</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="mesimages\options.png">
+      <Name>options</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="mesimages\play.png">
       <Name>play</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
