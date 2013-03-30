@@ -18,6 +18,13 @@ namespace CasseBriques
         private int minX;
         private int minY;
         private int nbreballes;
+        private bool raquettetouchee;
+
+        public bool Raquettetouchee
+        {
+            get { return raquettetouchee; }
+            set { raquettetouchee = value; }
+        }
 
         public int Nbreballes
         {
@@ -107,6 +114,7 @@ namespace CasseBriques
             this.position_depart = new Vector2((maxX / 2) - 10, (maxY - 50));
             minX = 0;
             minY = 0;
+            this.raquettetouchee = false;
             //On fixe le nombre de balles
             this.nbreballes = 3;
             base.Initialize();
@@ -179,8 +187,8 @@ namespace CasseBriques
 
                             if ((Math.Abs(v.Y) < v_max.Y) && (Math.Abs(v.X) < v_max.X))
                             {
-                                v.Y *= 1.1f;
-                                v.X *= 1.1f;
+                                if (v.Y > 0) { v.Y += 0.1f; } else { v.Y -= 0.1f; }
+                                if (v.X > 0) { v.X += 0.1f; } else { v.X -= 0.1f; }
                             }
                             uneballe.Vitesse = v;
                         }
@@ -192,8 +200,8 @@ namespace CasseBriques
                                 v.X *= -1;
                                 if ((Math.Abs(v.Y) < v_max.Y) && (Math.Abs(v.X) < v_max.X))
                                 {
-                                    v.Y *= 1.1f;
-                                    v.X *= 1.1f;
+                                    if (v.Y > 0) { v.Y += 0.1f; } else { v.Y -= 0.1f; }
+                                    if (v.X > 0) { v.X += 0.1f; } else { v.X -= 0.1f; }
                                 }
                                 uneballe.Vitesse = v;
                             }
@@ -212,6 +220,7 @@ namespace CasseBriques
             if (collision)
             {
                 mesBriquesballe[tempx, tempy].Marque = true; //la brique est cassée
+                this.raquettetouchee = false;
 
                 joueur.updateScore(100);
                 joueur.updateCombo();
@@ -245,8 +254,9 @@ namespace CasseBriques
             // avec les raquettes
             // On récupère la vitesse courante
             v = uneballe.Vitesse;
-            if (Moteur2D.testCollision(this, this.raquette.Bbox))
+            if (Moteur2D.testCollision(this, this.raquette.Bbox) && !this.raquettetouchee)
             {
+                this.raquettetouchee = true;
                 // Le prochain mouvement entraîne une collision, on évalue la position relative de la balle
                 // par rapport à la raquette pour mettre à jour le vecteur vitesse
                 float[] infosRaquette = { raquette.Uneraquette.Position.X, raquette.Uneraquette.Position.Y, raquette.Uneraquette.Size.X, raquette.Uneraquette.Size.Y };
@@ -297,6 +307,8 @@ namespace CasseBriques
                             //    v.X *= 1.1f;
                             uneballe.Vitesse = v;
                         }
+                        else if (posRel_centre[0] == Moteur2D.A_DROITE) { v.X = Math.Abs(v.X); v.Y *= -1; uneballe.Vitesse = v; }
+                            else if (posRel_centre[0] == Moteur2D.A_GAUCHE) { v.X = -Math.Abs(v.X); v.Y *= -1; uneballe.Vitesse = v; }
                     }
                 }
 
@@ -309,7 +321,7 @@ namespace CasseBriques
             else
             {
                 // avec les murs
-                bool collision_murs = false;
+                bool collision_murs = false; 
 
                 // collision avec le mur gauche
                 if (uneballe.Position.X  <= minX)
@@ -349,6 +361,7 @@ namespace CasseBriques
                     SoundEffectInstance soundInstMur = soundMur.CreateInstance();
                     soundInstMur.Volume = 0.6f;
                     soundInstMur.Play();
+                    this.raquettetouchee = false;
                 }
             }
         }
