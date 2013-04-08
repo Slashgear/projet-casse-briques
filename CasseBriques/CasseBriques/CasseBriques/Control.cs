@@ -10,6 +10,7 @@ namespace CasseBriques
     {
         private const Keys TOUCHE_DROITE = Keys.Right;
         private const Keys TOUCHE_GAUCHE = Keys.Left;
+        private const Keys TOUCHE_ESPACE = Keys.Space;
 
 
         // Vérifie si le joueur  a effectué l'action "aller à droite"
@@ -32,6 +33,16 @@ namespace CasseBriques
             checkActionDown = keyboard.IsKeyDown(TOUCHE_GAUCHE);
 
             return checkActionDown;
+        }
+
+        public static Boolean CheckActionSpace()
+        {
+            Boolean checkActiondown = false;
+            KeyboardState keyboard = Keyboard.GetState();
+
+            checkActiondown = keyboard.IsKeyDown(TOUCHE_ESPACE);
+
+            return checkActiondown;
         }
     }
 }
