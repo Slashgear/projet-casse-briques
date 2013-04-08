@@ -66,7 +66,6 @@ namespace CasseBriques
             //Raquette raquette = new Raquette(this, TAILLEH ,TAILLEV );
             unjoueur = new Joueur(this, 1, 0);
 
-
             Raquette raquette = unjoueur.Raquette;
 
 
@@ -213,8 +212,11 @@ namespace CasseBriques
              if (uneballe.Nbreballes == 0)
              {
                  spriteBatch.DrawString(this.textFont, "Game Over ... ! Vous avez épuisé toutes vos balles", new Vector2(13 * 20, 18 * 20), Color.Yellow);
-                 //Thread.Sleep(3000);
-                 this.Exit();
+                 if (Controls.CheckActionSpace())
+                 {
+                     //System.Threading.Thread.Sleep(10000);
+                     this.Exit();
+                 }
              }
             for (int x = 0; x < NBLIGNES; x++)
             {
