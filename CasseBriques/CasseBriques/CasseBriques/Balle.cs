@@ -19,6 +19,7 @@ namespace CasseBriques
         private int minY;
         private int nbreballes;
         private bool raquettetouchee;
+        private bool demarrageBalle;
 
         public bool Raquettetouchee
         {
@@ -39,6 +40,12 @@ namespace CasseBriques
         private const int TAILLEY = 12;
 
         private Vector2 v_min;
+
+        public Vector2 V_min
+        {
+            get { return v_min; }
+            set { v_min = value; }
+        }
         private Vector2 v_max;
         private Vector2 vitesse_initiale = Vector2.Zero;
         
@@ -50,7 +57,8 @@ namespace CasseBriques
         {
             get { return mesBriquesballe; }
             set { mesBriquesballe = value; }
-        } 
+        }
+        
 
         private ObjetAnime uneballe;
         // On encapsule le champ pour récupérer sa position relative
@@ -106,7 +114,7 @@ namespace CasseBriques
         public override void Initialize()
         {
             // On définit une vitesse initiale minimale 
-            v_min = new Vector2(2, -2);
+            v_min = new Vector2(0, -2);
             // on fixe une vitesse maximale
             v_max = new Vector2(7, 8);
             this.vitesse_initiale = v_min;
@@ -114,6 +122,7 @@ namespace CasseBriques
             this.position_depart = new Vector2((maxX / 2) - 10, (maxY - 50));
             minX = 0;
             minY = 0;
+            this.demarrageBalle = false;
             this.raquettetouchee = false;
             //On fixe le nombre de balles
             this.nbreballes = 3;
@@ -140,8 +149,13 @@ namespace CasseBriques
 
         public override void Update(GameTime gameTime)
         {
+            if (Controls.CheckActionSpace())
+            {
+                this.demarrageBalle = true;
+            }
             bougeBalle();
             base.Update(gameTime);
+            
         }
 
         // Test la collision avec les briques 
@@ -149,7 +163,7 @@ namespace CasseBriques
         {
             //fonction qui teste la collision entre une Brique et la Balle, elle gère les mouvements de la balle suite à cette collision
             BoundingBox bbox_brique;
-           Brique unebrique;
+            Brique unebrique;
             Vector2 v;
             Boolean collision = false;
             float[] infosBalle = { uneballe.Position.X, uneballe.Position.Y, TAILLEX, TAILLEY };
@@ -234,11 +248,7 @@ namespace CasseBriques
             
         }
                 
-
-           
-
-
-        
+     
         private void gestionCollision()
         {
             // Test la collision  entre la balle et les murs et la balle et la raquette et elle modifie le vecteur vitesse en fonction
@@ -348,12 +358,13 @@ namespace CasseBriques
                 // on perd la balle 
                 if (uneballe.Position.Y >= maxY)
                 {
+                    this.demarrageBalle = false;
                      v.Y*=-1;
                     collision_murs = true;
                     uneballe.Vitesse = v;
                     this.nbreballes--;
                     joueur.reinitialiserCombo();
-
+                    //ICIIIIIIIIII !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 }
 
                 if (collision_murs)
@@ -368,14 +379,25 @@ namespace CasseBriques
         
         private void bougeBalle()
         {
-            // on met à jour la Bounding Box
-            this.bbox = new BoundingBox(new Vector3(uneballe.Position.X, uneballe.Position.Y, 0),
-                new Vector3(uneballe.Position.X + TAILLEX, uneballe.Position.Y + TAILLEY, 0));
-          
-            // Test la collision et modifie le vecteur vitesse en fonction
-            gestionCollision();
-            gestionCollisionBrique(); 
-            uneballe.Position += uneballe.Vitesse;
+            if (this.demarrageBalle == false)
+            {
+                Vector2 v;
+                v = this.raquette.Uneraquette.Position;
+                v.X = v.X + raquette.Uneraquette.Size.X / 2;
+                v.Y = (maxY - 50);
+                uneballe.Position = v;
+            }
+            else
+            {
+                // on met à jour la Bounding Box
+                this.bbox = new BoundingBox(new Vector3(uneballe.Position.X, uneballe.Position.Y, 0),
+                    new Vector3(uneballe.Position.X + TAILLEX, uneballe.Position.Y + TAILLEY, 0));
+
+                // Test la collision et modifie le vecteur vitesse en fonction
+                gestionCollision();
+                gestionCollisionBrique();
+                uneballe.Position += uneballe.Vitesse;
+            }
         }
          
     }
