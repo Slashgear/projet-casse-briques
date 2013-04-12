@@ -44,6 +44,15 @@ namespace CasseBriques
         //declaration d'un joueur
         private Joueur unjoueur;
 
+        enum GameState
+        {
+            MainMenu,
+            Play,
+            Options,
+       
+        }
+        GameState CurrentGameState = GameState.MainMenu;
+
         public Jeu()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -158,7 +167,41 @@ namespace CasseBriques
                 this.Exit();
             // TODO: Add your update logic here
             //System.Diagnostics.Debug.WriteLine(mouseEvent.GetMouseContainer.getX() + mouseEvent.GetMouseContainer.getY());
-            if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
+            switch (CurrentGameState)
+            {
+                case GameState.MainMenu:
+                    if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
+            {
+                if (mouseEvent.UpdateMouse() == true)
+                {
+                    CurrentGameState = GameState.Play;
+                }
+            }
+            if (mouseEvent.GetMouseContainer().Intersects(boutonoptions.getContainer()))
+            {
+                if (mouseEvent.UpdateMouse() == true)
+                {
+
+                }
+            }
+            if (mouseEvent.GetMouseContainer().Intersects(boutonexit.getContainer()))
+            {
+                if (mouseEvent.UpdateMouse() == true)
+                {
+                    this.Exit();
+                }
+            }
+                    break;
+
+                case GameState.Options:
+
+                    break;
+
+                case GameState.Play:
+
+                    break;
+            }
+            /*if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
             {
                 if (mouseEvent.UpdateMouse() == true)
                 {
@@ -179,7 +222,7 @@ namespace CasseBriques
                     this.Exit();
                 }
             }
-            
+            */
           
             base.Update(gameTime);
         }
@@ -198,7 +241,65 @@ namespace CasseBriques
 
             // TODO: Add your drawing code here
              spriteBatch.Begin();
+             switch (CurrentGameState)
+             {
+                 case GameState.MainMenu:
              boutonplay.DrawButton(spriteBatch);
+             boutonoptions.DrawButton(spriteBatch);
+             boutonexit.DrawButton(spriteBatch);
+                    break;
+
+                 case GameState.Play:
+
+                     string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
+             spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
+
+             string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
+             spriteBatch.DrawString(this.textFont, afficheScore, new Vector2(10, 5), Color.White);
+
+            // Boucle permettant de dessiner les briques des murs
+           
+             if (uneballe.Nbreballes == 0)
+             {
+                 spriteBatch.DrawString(this.textFont, "Game Over ... ! Vous avez épuisé toutes vos balles", new Vector2(13 * 20, 18 * 20), Color.Yellow);
+                 if (Controls.CheckActionSpace())
+                 {
+                     //System.Threading.Thread.Sleep(10000);
+                     this.Exit();
+                 }
+             }
+             for (int x = 0; x < NBLIGNES; x++)
+             {
+                 for (int y = 0; y < NBBRIQUES; y++)
+                 {
+
+                     pos = mesBriques[x, y].Position;
+                     if (!mesBriques[x, y].Marque)
+                         switch (x)
+                         {
+                             case 0: spriteBatch.Draw(briquepoint.Texture, pos, Color.Azure); break;
+                             case 1: spriteBatch.Draw(briquegrise.Texture, pos, Color.Gray); break;
+                             case 2: spriteBatch.Draw(briquerouge.Texture, pos, Color.Red); break;
+                             case 3: spriteBatch.Draw(briqueorange.Texture, pos, Color.Orange); break;
+                             case 4: spriteBatch.Draw(briqueviolet.Texture, pos, Color.Violet); break;
+                         }
+                     else
+                     {
+                         spriteBatch.Draw(unebriquenoire, pos, Color.Black);
+                     }
+
+
+                 }
+             }
+
+                     break;
+
+                 case GameState.Options:
+
+                     break;
+
+             }
+             /*boutonplay.DrawButton(spriteBatch);
              boutonoptions.DrawButton(spriteBatch);
              boutonexit.DrawButton(spriteBatch);
              string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
@@ -240,7 +341,7 @@ namespace CasseBriques
 
                     
                 }
-            }         
+            }*/         
             spriteBatch.End();
             base.Draw(gameTime);
         }
