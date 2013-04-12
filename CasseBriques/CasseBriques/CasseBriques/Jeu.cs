@@ -65,12 +65,14 @@ namespace CasseBriques
         /// related content.  Calling base.Initialize will enumerate through any components
         /// and initialize them as well.
         /// </summary>
-        protected override void Initialize()
+
+        protected void Initialize2()
         {
+
             int offsetX = 40;
             int offsetY = 40;
             // TODO: Add your initialization logic here
-            uneballe = new Balle(this, TAILLEH , TAILLEV);
+            uneballe = new Balle(this, TAILLEH, TAILLEV);
 
             //Raquette raquette = new Raquette(this, TAILLEH ,TAILLEV );
             unjoueur = new Joueur(this, 1, 0);
@@ -95,7 +97,7 @@ namespace CasseBriques
                 for (int y = 0; y < NBBRIQUES; y++)
                 {
                     xpos = offsetX + y * TAILLEBRIQUEX;
-                   
+
                     Vector2 pos = new Vector2(xpos, ypos);
                     // On mémorise les positions de la brique
                     mesBriques[x, y] = new Brique(pos, new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY));
@@ -103,6 +105,12 @@ namespace CasseBriques
             }
 
             uneballe.MesBriquesballe = mesBriques;
+            base.Initialize();
+        }
+
+        protected override void Initialize()
+        {
+            
             
             boutonplay = new MenuButton(new Vector2(450,350), Content.Load<Texture2D>(@"mesimages\play"), new Rectangle(450, 350, 150, 60));
             boutonoptions = new MenuButton(new Vector2(450, 420), Content.Load<Texture2D>(@"mesimages\options"), new Rectangle(450, 420, 150, 60));
@@ -175,6 +183,7 @@ namespace CasseBriques
                 if (mouseEvent.UpdateMouse() == true)
                 {
                     CurrentGameState = GameState.Play;
+                    Initialize2();
                 }
             }
             if (mouseEvent.GetMouseContainer().Intersects(boutonoptions.getContainer()))
@@ -251,7 +260,7 @@ namespace CasseBriques
 
                  case GameState.Play:
 
-                     string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
+             string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
              spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
 
              string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
