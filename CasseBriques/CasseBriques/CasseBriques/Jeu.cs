@@ -297,6 +297,7 @@ namespace CasseBriques
                              case 2: spriteBatch.Draw(briquerouge.Texture, pos, Color.Red); break;
                              case 3: spriteBatch.Draw(briqueorange.Texture, pos, Color.Orange); break;
                              case 4: spriteBatch.Draw(briqueviolet.Texture, pos, Color.Violet); break;
+
                          }
                      else
                      {
