@@ -31,7 +31,7 @@ namespace CasseBriques
         private Brique[,] mesBriques = new Brique[NBLIGNES, NBBRIQUES];
         
         // Déclaration des objets brique raquette balle
-        private ObjetAnime briquegrise, briquebleue, briqueorange, briquepoint, briquerouge,briqueviolet, balle, raquette;
+        private ObjetAnime briquegrise, briquebleue, briqueorange, briquepoint, briquerouge,briqueviolet/*, balle, raquette*/;
         private SpriteFont textFont;
         private Texture2D unebriquenoire;
         private Balle uneballe;
@@ -105,16 +105,16 @@ namespace CasseBriques
             }
 
             uneballe.MesBriquesballe = mesBriques;
-            base.Initialize();
+            
         }
 
         protected override void Initialize()
         {
             
             
-            boutonplay = new MenuButton(new Vector2(450,350), Content.Load<Texture2D>(@"mesimages\play"), new Rectangle(450, 350, 150, 60));
-            boutonoptions = new MenuButton(new Vector2(450, 420), Content.Load<Texture2D>(@"mesimages\options"), new Rectangle(450, 420, 150, 60));
-            boutonexit = new MenuButton(new Vector2(450, 490), Content.Load<Texture2D>(@"mesimages\exit"), new Rectangle(450, 490, 150, 60));
+            boutonplay = new MenuButton(new Vector2(450,230), Content.Load<Texture2D>(@"mesimages\play"), new Rectangle(450, 350, 150, 60));
+            boutonoptions = new MenuButton(new Vector2(450, 300), Content.Load<Texture2D>(@"mesimages\options"), new Rectangle(450, 420, 150, 60));
+            boutonexit = new MenuButton(new Vector2(450, 370), Content.Load<Texture2D>(@"mesimages\exit"), new Rectangle(450, 490, 150, 60));
 
             mouseEvent = new MouseEvent();
 
@@ -178,7 +178,9 @@ namespace CasseBriques
             switch (CurrentGameState)
             {
                 case GameState.MainMenu:
-                    if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
+               
+
+            if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
             {
                 if (mouseEvent.UpdateMouse() == true)
                 {
@@ -207,7 +209,11 @@ namespace CasseBriques
                     break;
 
                 case GameState.Play:
-
+                if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.P))
+                    {
+                        CurrentGameState = GameState.MainMenu;
+                        Initialize();
+                    }
                     break;
             }
             /*if (mouseEvent.GetMouseContainer().Intersects(boutonplay.getContainer()))
@@ -253,6 +259,7 @@ namespace CasseBriques
              switch (CurrentGameState)
              {
                  case GameState.MainMenu:
+             
              boutonplay.DrawButton(spriteBatch);
              boutonoptions.DrawButton(spriteBatch);
              boutonexit.DrawButton(spriteBatch);
@@ -262,7 +269,6 @@ namespace CasseBriques
 
              string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
              spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
-
              string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
              spriteBatch.DrawString(this.textFont, afficheScore, new Vector2(10, 5), Color.White);
 
