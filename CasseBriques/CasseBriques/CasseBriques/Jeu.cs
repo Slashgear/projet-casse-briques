@@ -31,7 +31,7 @@ namespace CasseBriques
         private Brique[,] mesBriques = new Brique[NBLIGNES, NBBRIQUES];
         
         // Déclaration des objets brique raquette balle
-        private ObjetAnime briquegrise, briquebleue, briqueorange, briquepoint, briquerouge,briqueviolet/*, balle, raquette*/;
+        private ObjetAnime briquegrise, briquebleue, briqueorange, briquepoint, briquerouge,briquelait/*, balle, raquette*/;
         private SpriteFont textFont;
         private Texture2D unebriquenoire;
         private Balle uneballe;
@@ -147,7 +147,7 @@ namespace CasseBriques
             briqueorange = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briqueorange"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquepoint = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquepoint"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquerouge = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquerouge"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
-            briqueviolet = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briqueviolet"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            briquelait = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquelait"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             unebriquenoire = Content.Load<Texture2D>(@"mesimages\briquenoire");
             // On charge la police
             
@@ -296,7 +296,7 @@ namespace CasseBriques
                              case 1: spriteBatch.Draw(briquegrise.Texture, pos, Color.Gray); break;
                              case 2: spriteBatch.Draw(briquerouge.Texture, pos, Color.Red); break;
                              case 3: spriteBatch.Draw(briqueorange.Texture, pos, Color.Orange); break;
-                             case 4: spriteBatch.Draw(briqueviolet.Texture, pos, Color.Violet); break;
+                             case 4: spriteBatch.Draw(briquelait.Texture, pos, Color.White); break;
 
                          }
                      else
