@@ -37,7 +37,7 @@ namespace CasseBriques
         private Vector2 position_depart;
        // on définit la taille de la raquette 
         private const int TAILLEX = 9;
-        private const int TAILLEY = 12;
+        private const int TAILLEY = 9;
 
         private Vector2 v_min;
 
@@ -132,7 +132,7 @@ namespace CasseBriques
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            uneballe  = new ObjetAnime(Game.Content.Load<Texture2D>(@"mesimages\balle"), position_depart, new Vector2(TAILLEX, TAILLEY), vitesse_initiale);
+            uneballe = new ObjetAnime(Game.Content.Load<Texture2D>(@"mesimages\balle"), position_depart, new Vector2(TAILLEX, TAILLEY), vitesse_initiale);
             soundRaquette = Game.Content.Load<SoundEffect>(@"sounds\rebond-raquette");
             soundMur = Game.Content.Load<SoundEffect>(@"sounds\rebond-terre_battue");
             // on met à jour la Bounding Box
