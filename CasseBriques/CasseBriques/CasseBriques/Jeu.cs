@@ -31,9 +31,10 @@ namespace CasseBriques
         private Brique[,] mesBriques = new Brique[NBLIGNES, NBBRIQUES];
         
         // Déclaration des objets brique raquette balle
-        private ObjetAnime briquegrise, briquebleue, briqueorange, briquepoint, briquerouge,briquelait/*, balle, raquette*/;
+        private ObjetAnime briquementhe, briquenoire, briqueorange, briqueviolette, briquerouge,briquelait/*, balle, raquette*/;
         private SpriteFont textFont;
         private Texture2D unebriquenoire;
+        private Texture2D fond;
         private Balle uneballe;
         //création du menu fail
         private MenuButton boutonplay;
@@ -121,6 +122,7 @@ namespace CasseBriques
         
             base.Initialize();
         }
+   
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
@@ -142,12 +144,13 @@ namespace CasseBriques
             /// la balle
             /// la raquette
             /// 
-            briquegrise = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquegrise"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
-            briquebleue = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquebleue"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
-            briqueorange = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briqueorange"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
-            briquepoint = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquepoint"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            briquementhe = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\brique_menthe"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            briquenoire = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\brique_noire"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            briqueorange = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\brique_orange"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            briqueviolette = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\brique_violette"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquerouge = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquerouge"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquelait = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquelait"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
+            fond = Content.Load<Texture2D>(@"mesimages\fondniveau1");
             unebriquenoire = Content.Load<Texture2D>(@"mesimages\briquenoire");
             // On charge la police
             
@@ -251,6 +254,7 @@ namespace CasseBriques
         {
            
             Vector2 pos ;
+            Vector2 posfond = new Vector2(0, 0);
             GraphicsDevice.Clear(Color.Black);
             this.IsMouseVisible = true;
 
@@ -259,6 +263,7 @@ namespace CasseBriques
              switch (CurrentGameState)
              {
                  case GameState.MainMenu:
+
              
              boutonplay.DrawButton(spriteBatch);
              boutonoptions.DrawButton(spriteBatch);
@@ -267,6 +272,7 @@ namespace CasseBriques
 
                  case GameState.Play:
 
+             spriteBatch.Draw(fond, posfond, Color.White);
              string afficheNbBalles = string.Format("Balles restantes: {0}", uneballe.Nbreballes);
              spriteBatch.DrawString(this.textFont, afficheNbBalles, new Vector2((TAILLEH - 180), 5), Color.White);
              string afficheScore = string.Format("Score:{0}", unjoueur.ScoreJoueur);
@@ -292,10 +298,10 @@ namespace CasseBriques
                      if (!mesBriques[x, y].Marque)
                          switch (x)
                          {
-                             case 0: spriteBatch.Draw(briquepoint.Texture, pos, Color.Azure); break;
-                             case 1: spriteBatch.Draw(briquegrise.Texture, pos, Color.Gray); break;
-                             case 2: spriteBatch.Draw(briquerouge.Texture, pos, Color.Red); break;
-                             case 3: spriteBatch.Draw(briqueorange.Texture, pos, Color.Orange); break;
+                             case 0: spriteBatch.Draw(briquementhe.Texture, pos, Color.White); break;
+                             case 1: spriteBatch.Draw(briquenoire.Texture, pos, Color.White); break;
+                             case 2: spriteBatch.Draw(briqueviolette.Texture, pos, Color.White); break;
+                             case 3: spriteBatch.Draw(briqueorange.Texture, pos, Color.White); break;
                              case 4: spriteBatch.Draw(briquelait.Texture, pos, Color.White); break;
 
                          }
