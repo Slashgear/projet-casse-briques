@@ -35,6 +35,7 @@ namespace CasseBriques
         private SpriteFont textFont;
         private Texture2D unebriquenoire;
         private Texture2D fond;
+        private Texture2D fondmenu;
         private Balle uneballe;
         //création du menu fail
         private MenuButton boutonplay;
@@ -150,7 +151,8 @@ namespace CasseBriques
             briqueviolette = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\brique_violette"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquerouge = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquerouge"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
             briquelait = new ObjetAnime(Content.Load<Texture2D>(@"mesimages\briquelait"), new Vector2(0f, 0f), new Vector2(TAILLEBRIQUEX, TAILLEBRIQUEY), Vector2.Zero);
-            fond = Content.Load<Texture2D>(@"mesimages\fondniveau1");
+            fond = Content.Load<Texture2D>(@"mesimages\fondniveau1"); 
+            fondmenu = Content.Load<Texture2D>(@"mesimages\fondmenu");
             unebriquenoire = Content.Load<Texture2D>(@"mesimages\briquenoire");
             // On charge la police
             
@@ -264,7 +266,7 @@ namespace CasseBriques
              {
                  case GameState.MainMenu:
 
-             
+             spriteBatch.Draw(fondmenu, posfond, Color.White);
              boutonplay.DrawButton(spriteBatch);
              boutonoptions.DrawButton(spriteBatch);
              boutonexit.DrawButton(spriteBatch);
