@@ -36,8 +36,8 @@ namespace CasseBriques
         // et sa position courante, champ qui sera accessible depuis un objet 
         private Vector2 position_depart;
        // on définit la taille de la raquette 
-        private const int TAILLEX = 9;
-        private const int TAILLEY = 9;
+        private const int TAILLEX = 20;
+        private const int TAILLEY = 20;
 
         private Vector2 v_min;
 
@@ -114,7 +114,7 @@ namespace CasseBriques
         public override void Initialize()
         {
             // On définit une vitesse initiale minimale 
-            v_min = new Vector2(0, -2);
+            v_min = new Vector2(0, -3);
             // on fixe une vitesse maximale
             v_max = new Vector2(7, 8);
             this.vitesse_initiale = v_min;
@@ -132,7 +132,7 @@ namespace CasseBriques
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            uneballe = new ObjetAnime(Game.Content.Load<Texture2D>(@"mesimages\balle"), position_depart, new Vector2(TAILLEX, TAILLEY), vitesse_initiale);
+            uneballe = new ObjetAnime(Game.Content.Load<Texture2D>(@"mesimages\ballebonbon"), position_depart, new Vector2(TAILLEX, TAILLEY), vitesse_initiale);
             soundRaquette = Game.Content.Load<SoundEffect>(@"sounds\rebond-raquette");
             soundMur = Game.Content.Load<SoundEffect>(@"sounds\rebond-terre_battue");
             // on met à jour la Bounding Box
@@ -383,8 +383,8 @@ namespace CasseBriques
             {
                 Vector2 v;
                 v = this.raquette.Uneraquette.Position;
-                v.X = v.X + raquette.Uneraquette.Size.X / 2;
-                v.Y = (maxY - 50);
+                v.X = v.X + raquette.Uneraquette.Size.X / 2 -10;
+                v.Y = (maxY - 58);
                 uneballe.Position = v;
             }
             else
